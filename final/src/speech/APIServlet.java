@@ -19,13 +19,13 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class SpeechServlet
  */
-@WebServlet("/stt/speech")
-public class SpeechServlet extends HttpServlet
+@WebServlet("/stt/api")
+public class APIServlet extends HttpServlet
 {
    private static final long serialVersionUID = 1L;
     private int id;
     private String trans;
-    private int flag;
+    //private int flag;
     private String transcription;
     
    /**
@@ -49,7 +49,7 @@ public class SpeechServlet extends HttpServlet
        transcription = new String(request.getParameter("transcription").getBytes("8859_1"), "UTF-8");
        transcription = trans + transcription;
        session.setAttribute("trans", transcription);
-       //session.removeAttribute("trans");
+       //session.removeAttribute("trans"); //세션 삭제
        String confidence = request.getParameter("confidence");
        
        System.out.println(date+", "+transcription + ", " + confidence);

@@ -18,8 +18,8 @@ import javax.servlet.http.HttpSession;
 
 
 // ServletContext에 보관된 MemberDao 사용하기  
-@WebServlet("/stt/home")
-public class HomePageServlet extends HttpServlet {
+@WebServlet("/stt/index")
+public class IndexPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	
@@ -36,9 +36,11 @@ public class HomePageServlet extends HttpServlet {
 	     
 	     request.setCharacterEncoding("UTF-8");
 	     HttpSession session = request.getSession();
-	     int id = 0;
-	     //id = 3;
-	   
+	     
+	     int id;
+	     id = 1;
+	     session.setAttribute("id", id); //session에 id 저장 
+	     
 	     String customer = new String(request.getParameter("customer").getBytes("8859_1"), "UTF-8");
 	     String counsellor = new String(request.getParameter("counsellor").getBytes("8859_1"), "UTF-8");
 	      
@@ -68,7 +70,7 @@ public class HomePageServlet extends HttpServlet {
 	           }
 	           
 	           
-	           session.setAttribute("id", id); //session에 id 저장
+	           
 	           System.out.println(id+", "+customer + ", " + counsellor);
 	          
 	           stmt.executeUpdate("INSERT INTO APIRESULT(id,customer,counsellor) VALUES ("+id+",'"+customer+"','"+counsellor+"')");

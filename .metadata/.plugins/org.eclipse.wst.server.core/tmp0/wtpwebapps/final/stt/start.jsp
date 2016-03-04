@@ -107,7 +107,7 @@
   <hr>
 <%
 ArrayList<String> morphs = new ArrayList<String>(); //ArrayList 생성;
-Vector<String> morphs2 = new Vector<String>();
+//Vector<String> morphs2 = new Vector<String>();
 //question : textarea에서 입력받은 값
 //위의 자바문에서 받는걸로 되있음
 try
@@ -115,7 +115,7 @@ try
 	if(!"".equals(question)) 
 	{
 		log.info(question); //전체 넘어온 음성인식 결과 출력
-		long start = System.currentTimeMillis();
+		long start = System.currentTimeMillis(); //시간 찍히도록
 		MorphAnalyzer analyzer = new MorphAnalyzer();
 		KoreanTokenizer tokenizer = new KoreanTokenizer(new StringReader(question));
 		Token token = null;
@@ -133,18 +133,18 @@ try
 				analyzer.setExactCompound(false);
 				List<AnalysisOutput> results = analyzer.analyze(token.termText());
 				out.println("<div class='title'>");		
-				out.println(token.termText()); //음절
+				out.println(token.termText()); //음절로 자르기 ex)안녕하세요/저는/박유진/입니다.
 				out.println("</div>");		
 				
 				for(AnalysisOutput o : results) 
 				{
-					str = o.toString();
+					str = o.toString(); //string 형식으로 바꿈
 					out.println("<div class='inner'>");	//음운			
 					out.println(str+"->");
 					log.info("1:"+str);
 					log.info("->:"+str.replaceAll("\\([a-zA-Z]+\\)","")); //타입이 없어진 형태소 분석 결과 -> DB 저장
 					
-					String[] st2 = new String(str.replaceAll("\\([a-zA-Z]+\\)","")).split(",");
+					String[] st2 = new String(str.replaceAll("\\([a-zA-Z]+\\)","")).split(","); //ex)안녕,하세,요 -> 안녕/하세/요
 					for(String s : st2) 
 					{
 						System.out.println(s);
@@ -174,7 +174,7 @@ try
 					log.info("4:"+o.getVsfx()); */	
 					
 					
-					for(int i=0;i<o.getCNounList().size();i++)
+					for(int i=0;i<o.getCNounList().size();i++) //한번 더 쪼개질 경우
 					{
 						out.println(o.getCNounList().get(i).getWord()+"/");
 						log.info("for문:"+o.getCNounList().get(i).getWord()); //쪼개진 음운에서 또 다른 의미가 있는 음운일 경우에만 나옴!

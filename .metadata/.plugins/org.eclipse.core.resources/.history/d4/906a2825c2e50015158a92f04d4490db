@@ -46,11 +46,9 @@ public class EmotionServlet extends HttpServlet {
 		PreparedStatement pstmt = null;
 		
 		HttpSession session = request.getSession();
-		
+
 		request.setCharacterEncoding("UTF-8");
-		
-		 id = (int) session.getAttribute("id");
-		    System.out.println("현재 id : " + id);
+
 		// String[] mresult = request.getParameterValues("mresult");
 		// String[] quantity = request.getParameterValues("bookonum");
 		// System.out.println("quantity"+quantity.length);
@@ -63,7 +61,8 @@ public class EmotionServlet extends HttpServlet {
 			Sheet mySheet = myWorkbook.getSheet(0); // 시트를 입력 받음
 
 			//////////////////////////////////////////////////////////////
-			
+			 id = (int) session.getAttribute("id");
+			    System.out.println("현재 id : " + id);
 			ServletContext sc = this.getServletContext();
 
 			Class.forName(sc.getInitParameter("driver"));

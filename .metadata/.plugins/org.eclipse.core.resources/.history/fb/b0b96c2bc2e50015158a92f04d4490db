@@ -48,7 +48,6 @@ public class EmotionServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		request.setCharacterEncoding("UTF-8");
-		
 		 id = (int) session.getAttribute("id");
 		    System.out.println("ÇöÀç id : " + id);
 		// String[] mresult = request.getParameterValues("mresult");

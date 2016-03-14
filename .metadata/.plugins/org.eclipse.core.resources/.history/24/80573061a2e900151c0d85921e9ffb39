@@ -60,7 +60,7 @@ public class APIServlet extends HttpServlet
       
       try {
          ServletContext sc = this.getServletContext();
-         Class.forName(sc.getInitParameter("driver"));
+         Class.forName(getInitParameter("driver"));
          DriverManager.registerDriver(new com.mysql.jdbc.Driver());
          conn = DriverManager.getConnection("jdbc:mysql://localhost/resultdb?useUnicode=true&characterEncoding=UTF-8", "sttresult", "sttresult"); 
          stmt = conn.createStatement();

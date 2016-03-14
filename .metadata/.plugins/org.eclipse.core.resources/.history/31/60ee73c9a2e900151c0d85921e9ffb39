@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class SpeechServlet
  */
-@WebServlet("/stt/api")
+@WebServlet("/stt/speech")
 public class APIServlet extends HttpServlet
 {
    private static final long serialVersionUID = 1L;

@@ -69,7 +69,7 @@ public class IndexPageServlet extends HttpServlet {
 	            id = rs.getInt("cnt")+1;
 	           }
 	           
-	           session.setAttribute("id", id); //sessionø° id ¿˙¿Â
+	           
 	           
 	           System.out.println(id+", "+customer + ", " + counsellor);
 	          

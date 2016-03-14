@@ -1,0 +1,85 @@
+package speech;
+
+import jxl.*; 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import vo.Exceldb;
+
+@WebServlet("/stt/emotion")
+public class EmotionServlet extends HttpServlet throws FileNotFoundException, IOException, jxl.read.biff.BiffException{
+	private static final long serialVersionUID = 1L;
+	int id;
+	static String mresult = null;
+	static double prototypicality;
+	static double familiarity;
+	static double vitalization;
+	static double pleasant;
+
+	@Override
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+
+		request.setCharacterEncoding("UTF-8");
+
+		// String[] mresult = request.getParameterValues("mresult");
+		// String[] quantity = request.getParameterValues("bookonum");
+		// System.out.println("quantity"+quantity.length);
+
+		try {
+			ServletContext sc = this.getServletContext();
+
+			Class.forName(sc.getInitParameter("driver"));
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+
+			conn = DriverManager.getConnection(
+					"jdbc:mysql://localhost/resultdb?useUnicode=true&characterEncoding=UTF-8", // JDBC
+																								// //
+																								// URL
+					"sttresult", // DBMS 사용자 아이디
+					"sttresult"); // DBMS 사용자 암호
+			stmt = conn.createStatement();
+
+			rs = stmt.executeQuery("SELECT MRESULT FROM MORPHRESULT");
+			response.setContentType("text/html; charset=UTF-8");
+
+			ArrayList<Exceldb> emotions = new ArrayList<Exceldb>();
+
+			while (rs.next()) {
+				emotions.add(new Exceldb().setmresult(rs.getString("mresult")));
+				System.out.println(rs.getString("mresult"));
+			}
+
+			request.setAttribute("emotions", emotions);
+
+			response.setContentType("text/html; charset=UTF-8");
+			// RequestDispatcher rd =
+			// request.getRequestDispatcher("/bookstore/Bookorder.jsp");
+			// rd.include(request, response);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("error", e);
+			RequestDispatcher rd = request.getRequestDispatcher("/Error.jsp");
+			rd.forward(request, response);
+		}
+	}
+}

@@ -109,7 +109,8 @@
   <div style="font-weight:bold;margin-top:20px">출력 : </div>
   <hr>
 <%
-ArrayList<String> morphs = new ArrayList<String>(); //ArrayList 생성;
+ArrayList<String> morphs = new ArrayList<String>(); //morph 결과 저장 ArrayList 생성
+ArrayList<String> types = new ArrayList<String>(); //type 결과 저장 Arraylist 생성
 //Vector<String> morphs2 = new Vector<String>();
 //question : textarea에서 입력받은 값
 //위의 자바문에서 받는걸로 되있음
@@ -156,10 +157,11 @@ try
 					while(m.find()) //m에 저장된 값들을 하나씩 가져옴
 					{
 						log.info("타입 : " + m.group(1));
+						types.add(m.group(1)); //타입 저장
 					}
 					
 					String[] st2 = new String(str.replaceAll("\\([a-zA-Z]+\\)","")).split(","); //ex)안녕,하세,요 -> 안녕/하세/요
-					for(String s : st2) 
+					for(String s : st2)  
 					{
 						System.out.println("split : " + s);
 						morphs.add(s); //음운 저장
@@ -187,14 +189,26 @@ try
 					log.info("3:"+o.getEomi()+" / "); //동사에서 색인어 다음 것들!!!
 					log.info("4:"+o.getVsfx()); */	
 					
+					/* Pattern p1 = Pattern.compile("\\((.*?)\\)"); //()안에 문자들을 찾음
+					Matcher m1 = p1.matcher(str); //찾은 문자들을 m에 저장
+					while(m1.find()) //m에 저장된 값들을 하나씩 가져옴
+					{
+						log.info("타입 : " + m1.group(1));
+						types.add(m1.group(1)); //타입 저장
+					} */
 					
+					//계약기간(N),이(j)-> 계약/ 기간/ <100>
 					for(int i=0;i<o.getCNounList().size();i++) //한번 더 쪼개질 경우
 					{
 						out.println(o.getCNounList().get(i).getWord()+"/");
 						log.info("for문:"+o.getCNounList().get(i).getWord()); //쪼개진 음운에서 또 다른 의미가 있는 음운일 경우에만 나옴!
+						//log.info("for문 타입 : " + );
 						
 						//ArrayList로 저장
 						morphs.add(o.getCNounList().get(i).getWord()); //음운 저장
+						types.add("notype"); //타입 저장(for문에서 나온 결과의 타입은 일단 버리는걸로!!!)
+						//ex) 부여합니다아(N) -> 부여/합니다아 
+						//둘 다 N타입으로 주기엔 나중에 N타입만 가져올 때 '합니다아'가 감정사전에서 찾아올 때 또 모든 결과를 찾아올 것 같아서 일단 버리는 걸로...
 					}
 					out.println("<"+o.getScore()+">");					
 					out.println("</div>");		
@@ -210,7 +224,10 @@ try
 			out.println("</div>");	
 		}
 		out.println("<div>"+(System.currentTimeMillis()-start)+"ms</div>");
+		
+		//만든 ArrayList 세션으로 넘기기
 		session.setAttribute("morphs", morphs);
+		session.setAttribute("types", types);
 	}
 } catch(Exception e)
 {

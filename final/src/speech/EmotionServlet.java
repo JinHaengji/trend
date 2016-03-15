@@ -71,7 +71,8 @@ public class EmotionServlet extends HttpServlet {
 					"sttresult", // DBMS 사용자 아이디
 					"sttresult"); // DBMS 사용자 암호
 			stmt = conn.createStatement();
-
+			
+			//select id,mresult from morphresult where type = 'N' or type = 'V'; ???
 			rs = stmt.executeQuery("SELECT id,MRESULT FROM MORPHRESULT");
 			response.setContentType("text/html; charset=UTF-8");
 

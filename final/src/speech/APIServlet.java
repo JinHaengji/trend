@@ -33,6 +33,10 @@ public class APIServlet extends HttpServlet
     */
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
    {      
+	   
+	      Connection conn = null;
+	      Statement stmt = null;
+	      ResultSet rs = null;
       HttpSession session = request.getSession();
       
       request.setCharacterEncoding("UTF-8");
@@ -52,19 +56,15 @@ public class APIServlet extends HttpServlet
        //session.removeAttribute("trans"); //세션 삭제
        String confidence = request.getParameter("confidence");
        
-       System.out.println(date+", "+transcription + ", " + confidence);
+       System.out.println(id+", "+date+", "+transcription + ", " + confidence);
       
-      Connection conn = null;
-      Statement stmt = null;
-      ResultSet rs = null;
-
       try {
          ServletContext sc = this.getServletContext();
          Class.forName(sc.getInitParameter("driver"));
          DriverManager.registerDriver(new com.mysql.jdbc.Driver());
          conn = DriverManager.getConnection("jdbc:mysql://localhost/resultdb?useUnicode=true&characterEncoding=UTF-8", "sttresult", "sttresult"); 
          stmt = conn.createStatement();
-            stmt.executeUpdate("UPDATE APIRESULT SET date = '" + date + "', result = '" + transcription + "', confidence = '" + confidence + "' WHERE id = " + id);
+            stmt.executeUpdate("UPDATE APIRESULT SET date = '" + date + "', result = '" + transcription + "', confidence = " + confidence + " WHERE id =" + id);
             //session.setAttribute("trans", trans);
          
       } catch (Exception e) {

@@ -51,9 +51,9 @@ public class EmotionServlet extends HttpServlet {
 		// System.out.println("quantity"+quantity.length);
 
 		try {
-
+			//D:\\졸작\\ref\\db2.xls
 			///////////////////////// 엑셀 설정//////////////////////////////
-			Workbook myWorkbook = Workbook.getWorkbook(new File("C:\\Users\\wlsgo\\Desktop\\trend\\final\\db2.xls")); // 파일을
+			Workbook myWorkbook = Workbook.getWorkbook(new File("D:\\졸작\\ref\\db2.xls")); // 파일을
 			// 읽음
 			Sheet mySheet = myWorkbook.getSheet(0); // 시트를 입력 받음
 

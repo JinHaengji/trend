@@ -1,7 +1,10 @@
+<%@page import="java.util.regex.Matcher"%>
+<%@page import="java.util.regex.Pattern"%>
 <%@page import="java.util.Vector"%>
 <%@page import="java.util.StringTokenizer"%>
 <%@page import="org.apache.commons.logging.Log"%><%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@page import="java.net.URLEncoder"%>
 <%
 	request.setCharacterEncoding("EUC-KR");
 	Log log = LogFactory.getLog("org.apache.lucene.analysis.kr");
@@ -139,15 +142,26 @@ try
 				for(AnalysisOutput o : results) 
 				{
 					str = o.toString(); //string 형식으로 바꿈
+					
+					//System.out.println(str + "타입1 : " + o.getPos());
+					//System.out.println(str + "타입2 : " + o.getPos2());
+					//log.info("type : " + o.getType());
 					out.println("<div class='inner'>");	//음운			
 					out.println(str+"->");
 					log.info("1:"+str);
 					log.info("->:"+str.replaceAll("\\([a-zA-Z]+\\)","")); //타입이 없어진 형태소 분석 결과 -> DB 저장
 					
+					Pattern p = Pattern.compile("\\((.*?)\\)"); //()안에 문자들을 찾음
+					Matcher m = p.matcher(str); //찾은 문자들을 m에 저장
+					while(m.find()) //m에 저장된 값들을 하나씩 가져옴
+					{
+						log.info("타입 : " + m.group(1));
+					}
+					
 					String[] st2 = new String(str.replaceAll("\\([a-zA-Z]+\\)","")).split(","); //ex)안녕,하세,요 -> 안녕/하세/요
 					for(String s : st2) 
 					{
-						System.out.println(s);
+						System.out.println("split : " + s);
 						morphs.add(s); //음운 저장
 					}
 						

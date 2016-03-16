@@ -73,7 +73,6 @@ public class EmotionServlet extends HttpServlet {
 			stmt = conn.createStatement();
 			
 			//select id,mresult from morphresult where type = 'N' or type = 'V'; ???
-			//type이 v와 n인 결과값만 가져오기
 			rs = stmt.executeQuery("SELECT id,MRESULT FROM MORPHRESULT WHERE TYPE='V' OR TYPE='N'");
 			response.setContentType("text/html; charset=UTF-8");
 

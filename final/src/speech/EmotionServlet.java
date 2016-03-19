@@ -51,9 +51,9 @@ public class EmotionServlet extends HttpServlet {
 		// System.out.println("quantity"+quantity.length);
 
 		try {
-
+			//D:\\졸작\\ref\\db2.xls
 			///////////////////////// 엑셀 설정//////////////////////////////
-			Workbook myWorkbook = Workbook.getWorkbook(new File("C:\\Users\\wlsgo\\Desktop\\trend\\final\\db2.xls")); // 파일을
+			Workbook myWorkbook = Workbook.getWorkbook(new File("D:\\졸작\\ref\\db2.xls")); // 파일을
 			// 읽음
 			Sheet mySheet = myWorkbook.getSheet(0); // 시트를 입력 받음
 
@@ -71,8 +71,10 @@ public class EmotionServlet extends HttpServlet {
 					"sttresult", // DBMS 사용자 아이디
 					"sttresult"); // DBMS 사용자 암호
 			stmt = conn.createStatement();
-
-			rs = stmt.executeQuery("SELECT id,MRESULT FROM MORPHRESULT");
+			
+			//select id,mresult from morphresult where type = 'N' or type = 'V'; ???
+			//type이 v와 n인 결과값만 가져오기
+			rs = stmt.executeQuery("SELECT id,MRESULT FROM MORPHRESULT WHERE TYPE='V' OR TYPE='N'");
 			response.setContentType("text/html; charset=UTF-8");
 
 			ArrayList<Exceldb> emotions = new ArrayList<Exceldb>();

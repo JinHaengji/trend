@@ -25,6 +25,7 @@ public class MorphDBServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
     private ArrayList<String> morphs = new ArrayList<String>();
+    private ArrayList<String> types = new ArrayList<String>();
     private int id;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
@@ -39,8 +40,9 @@ public class MorphDBServlet extends HttpServlet
 		request.setCharacterEncoding("UTF-8");
 	    response.setContentType("text/html; charset=UTF-8");
 	    
-	    //배열 가져오기
+	    //ArrayList 세션에서 가져오기
 	    morphs = (ArrayList) session.getAttribute("morphs");
+	    types = (ArrayList)session.getAttribute("types");
 	    id = (int) session.getAttribute("id");
 	    System.out.println("현재 id : " + id);
 	    //session.removeAttribute("morphs"); //세션 삭제
@@ -48,7 +50,8 @@ public class MorphDBServlet extends HttpServlet
 	    //잘 넘어왔는지 출력해보기
 	    for(int i=0; i<morphs.size(); i++)
 		{
-			System.out.println("서블릿 : " + morphs.get(i));
+			System.out.println("morph서블릿 : " + morphs.get(i));
+			System.out.println("서블릿 타입 : " + types.get(i));
 		}
 
 	    //DB 저장
@@ -81,7 +84,7 @@ public class MorphDBServlet extends HttpServlet
 	             
 	              for(int i=0; i<morphs.size(); i++)
 	              {
-	            	  stmt.executeUpdate("INSERT INTO MORPHRESULT(id,mresult) VALUES ("+id+",'"+morphs.get(i)+"')");
+	            	  stmt.executeUpdate("INSERT INTO MORPHRESULT(id,mresult,type) VALUES ("+id+",'"+morphs.get(i)+"','"+types.get(i)+"')");
 	              }
 	              
 	              response.setContentType("text/html; charset=UTF-8");

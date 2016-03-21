@@ -122,7 +122,7 @@ public class EmotionServlet extends HttpServlet {
 							
 								statement2.executeUpdate("UPDATE MORPHRESULT SET prototypicality=0, familiarity=0, vitalization=0, pleasant=0");
 								// stmt = null;
-								//System.out.println("포함x" + rs.getString("mresult"));
+								System.out.println("포함x" + rs.getString("mresult"));
 							}
 						
 						// getContents()메소드에 대해

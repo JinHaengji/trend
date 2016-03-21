@@ -111,8 +111,7 @@ public class EmotionServlet extends HttpServlet {
 								// Exceldb().setprototypicality(prototypicality).setfamiliarity(familiarity)
 								// .setvitalization(vitalization).setpleasant(pleasant));
 								System.out.println(mresult + " 포함  " + rs.getString("mresult"));
-								//statement.executeUpdate("INSERT INTO MORPHRESULT(id,prototypicality,familiarity,vitalization,pleasant) VALUES ("+rs.getInt("id")+","+prototypicality+","+familiarity+","+vitalization+","+pleasant+")");
-								statement.executeUpdate("UPDATE MORPHRESULT SET prototypicality="+prototypicality+", familiarity="+familiarity+", vitalization="+vitalization+", pleasant=" +pleasant);
+								statement.executeUpdate("INSERT INTO MORPHRESULT(id,prototypicality,familiarity,vitalization,pleasant) VALUES ("+rs.getInt("id")+","+prototypicality+","+familiarity+","+vitalization+","+pleasant+")");
 								// stmt = null;
 							} }else { // 포함되어있지 않으면
 								Statement statement2 = conn.createStatement();	
@@ -122,7 +121,7 @@ public class EmotionServlet extends HttpServlet {
 							
 								statement2.executeUpdate("UPDATE MORPHRESULT SET prototypicality=0, familiarity=0, vitalization=0, pleasant=0");
 								// stmt = null;
-								//System.out.println("포함x" + rs.getString("mresult"));
+								System.out.println("포함x" + rs.getString("mresult"));
 							}
 						
 						// getContents()메소드에 대해

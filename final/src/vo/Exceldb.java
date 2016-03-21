@@ -8,6 +8,7 @@ public class Exceldb {
 	protected double 	familiarity;
 	protected double 	vitalization;
 	protected double 	pleasant;
+	protected String 	type;
 	
 	public int getid() {
 		return id;
@@ -59,6 +60,14 @@ public class Exceldb {
 	}
 	public Exceldb setpleasant(double pleasant) {
 		this.pleasant = pleasant;
+		return this;
+	}
+	
+	public String gettype() {
+		return type;
+	}
+	public Exceldb settype(String type) {
+		this.type = type;
 		return this;
 	}
 }

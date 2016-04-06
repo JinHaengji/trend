@@ -102,7 +102,7 @@ public class EmotionServlet extends HttpServlet {
 						Statement statement1 = conn.createStatement();
 						 
 						//°¨Á¤»çÀü¿¡ Æ÷ÇÔµÇ¸é
-							if (rs2.getString("emotionword").contains(rs.getString("mresult"))
+							if ((rs2.getString("emotionword").contains(rs.getString("mresult"))||rs.getString("mresult").contains(rs2.getString("emotionword")))
 									&& (rs2.getString("emotionword").charAt(0) == rs.getString("mresult").charAt(0))
 									&& (rs2.getString("emotionword").charAt(1) == rs.getString("mresult").charAt(1))) {
 
@@ -119,7 +119,7 @@ public class EmotionServlet extends HttpServlet {
 												+ rs2.getString("vitalization") + ", pleasant="
 												+ rs2.getString("pleasant") + " WHERE mresult='" + rs.getString("mresult") + "'");
 								// ¼·¼·ÇÏ´Ù like ¼·¼·~
-							}
+							} 
 						
 					}
 				} else {

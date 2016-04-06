@@ -1,4 +1,4 @@
-/*package excel;
+package excel;
 
 import java.io.*; // 파일 입력 관련 클래스
 import jxl.*; // jxl 관련 클래스
@@ -11,7 +11,7 @@ import java.util.*;
 
 public class Jxl_Read {
 	int id;
-	static String mresult = null;
+	static String emotionword = null;
 	static double prototypicality;
 	static double familiarity;
 	static double vitalization;
@@ -46,7 +46,7 @@ public class Jxl_Read {
 			for (int i = 0; i < 5; i++) { // 열의 갯수 만큼 돌려서
 				Cell myCell = mySheet.getCell(i, no); // 셀의 행과 열의 정보를 가져옴
 				
-				  if(i==0) mresult = defaultString(myCell.getContents());
+				  if(i==0) emotionword = defaultString(myCell.getContents());
 				  if(i==1) prototypicality = defaultDouble(myCell.getContents());
 				  if(i==2) familiarity = defaultDouble(myCell.getContents());
 				  if(i==3) vitalization = defaultDouble(myCell.getContents()); 
@@ -57,8 +57,8 @@ public class Jxl_Read {
 				// Quick and dirty function to return the contents of this cell
 				// as a string. 이라고 API에 쓰여 있더군요.
 			}
-			  insert_sql = "INSERT INTO morphresult(id,mresult,prototypicality,familiarity,vitalization,pleasant) values(1,'"
-				         + mresult + "',"
+			  insert_sql = "INSERT INTO emotiondic(emotionword,prototypicality,familiarity,vitalization,pleasant) values('"
+				         + emotionword + "',"
 				         + prototypicality + ","
 				         + familiarity + ","
 				         + vitalization + ","
@@ -91,4 +91,3 @@ public class Jxl_Read {
 		   return Double.parseDouble(str);
 		  }
 }
-*/

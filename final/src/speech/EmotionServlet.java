@@ -135,7 +135,7 @@ public class EmotionServlet extends HttpServlet {
 				} 
 				
 
-/*				else {
+				else {
 					// 모든 저장된 값
 					System.out.println("포함 하지 않는 " + rs.getString("mresult"));
 					Statement statement2 = conn.createStatement();
@@ -143,7 +143,7 @@ public class EmotionServlet extends HttpServlet {
 							"UPDATE MORPHRESULT SET prototypicality=0, familiarity=0, vitalization=0, pleasant=0 where mresult='"
 									+ rs.getString("mresult") + "'");
 
-				}*/
+				}
 			}
 			/*
 			 * if(rs.getDouble("prototypicality")==0) { Statement statement2 =

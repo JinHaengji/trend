@@ -8,14 +8,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>emotion dictionary comparison</title>
+<script>
+
+</script>
 </head>
 <body>
-<%
-	//감정사전에 있는 단어와 단어들을 비교하여 감정사전에 존재하면 감정수치 저장, 없으면 0으로 저장
 
-%>
 <form method="GET" action="emotion">
 	<input type="submit" value="감정비교하기">
 </form>
+<%
+	//감정사전에 있는 단어와 단어들을 비교하여 감정사전에 존재하면 감정수치 저장, 없으면 0으로 저장
+	//시간 비교하기
+ 
+%>
+	<script>
+	
+	</script>
 </body>
 </html>

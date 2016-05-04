@@ -82,47 +82,60 @@ public class EmotionServlet extends HttpServlet {
 
 			while (rs.next()) { // 섭섭 , 하, 어다, 걱정, 되, ㅂ니다
 				////////////////////////////////////////////////////////////////////////////////////////////////////
-				//단어랑 type이 찍힘
+				// 단어랑 type이 찍힘
 				System.out.println(rs.getString("mresult") + "  " + rs.getString("TYPE"));
 
-				//단어가 두글자 이상이고, 타입이  v,n이면
-				if (((rs.getString("TYPE").equals("V")) || (rs.getString("TYPE").equals("N")))&&(rs.getString("mresult").length() >= 2)) { 
+				// 단어가 두글자 이상이고, 타입이 v,n이면
+				if (((rs.getString("TYPE").equals("V")) || (rs.getString("TYPE").equals("N")))
+						&& (rs.getString("mresult").length() >= 2)) {
 					System.out.println("포함 하는 " + rs.getString("mresult"));
 					ResultSet rs2 = null;
 					Statement statement = conn.createStatement();
-					//섭섭하다, 걱정되다
-					/*rs2 = statement.executeQuery(
-							"SELECT emotionword, prototypicality, familiarity, vitalization, pleasant FROM emotiondic WHERE emotionword like '"
-									+ rs.getString("mresult") + "%'");*/
+					// 섭섭하다, 걱정되다
+					/*
+					 * rs2 = statement.executeQuery(
+					 * "SELECT emotionword, prototypicality, familiarity, vitalization, pleasant FROM emotiondic WHERE emotionword like '"
+					 * + rs.getString("mresult") + "%'");
+					 */
 					rs2 = statement.executeQuery(
 							"SELECT emotionword, prototypicality, familiarity, vitalization, pleasant FROM emotiondic");
 					
-					//감정사전 단어 다 가져오기
-					while (rs2.next()) { 
+					//일단 0으로 초기화
+					Statement statement2 = conn.createStatement();
+					statement2.executeUpdate(
+							"UPDATE MORPHRESULT SET prototypicality=0, familiarity=0, vitalization=0, pleasant=0 where mresult='"
+									+ rs.getString("mresult") + "'");
+					// 감정사전 단어 다 가져오기
+					while (rs2.next()) {
 						Statement statement1 = conn.createStatement();
-						 
-						//감정사전에 포함되면
-							if ((rs2.getString("emotionword").contains(rs.getString("mresult"))||rs.getString("mresult").contains(rs2.getString("emotionword")))
-									&& (rs2.getString("emotionword").charAt(0) == rs.getString("mresult").charAt(0))
-									&& (rs2.getString("emotionword").charAt(1) == rs.getString("mresult").charAt(1))) {
+						// 감정사전에 포함되면
+						if ((rs2.getString("emotionword").contains(rs.getString("mresult"))
+								|| rs.getString("mresult").contains(rs2.getString("emotionword")))
+								&& (rs2.getString("emotionword").charAt(0) == rs.getString("mresult").charAt(0))
+								&& (rs2.getString("emotionword").charAt(1) == rs.getString("mresult").charAt(1))) {
 
-								System.out.println(rs2.getString("emotionword") + "  ..  " + rs.getString("mresult"));
-								/*statement1.executeUpdate(
-										"UPDATE MORPHRESULT SET prototypicality=" + rs2.getString("prototypicality")
-												+ ", familiarity=" + rs2.getString("familiarity") + ", vitalization="
-												+ rs2.getString("vitalization") + ", pleasant="
-												+ rs2.getString("pleasant") + " WHERE '" + rs2.getString("emotionword")
-												+ "' like '" + rs.getString("mresult") + "%'");*/
-								statement1.executeUpdate(
-										"UPDATE MORPHRESULT SET prototypicality=" + rs2.getString("prototypicality")
-												+ ", familiarity=" + rs2.getString("familiarity") + ", vitalization="
-												+ rs2.getString("vitalization") + ", pleasant="
-												+ rs2.getString("pleasant") + " WHERE mresult='" + rs.getString("mresult") + "'");
-								// 섭섭하다 like 섭섭~
-							} 
-						
+							System.out.println(rs2.getString("emotionword") + "  ..  " + rs.getString("mresult"));
+							/*
+							 * statement1.executeUpdate(
+							 * "UPDATE MORPHRESULT SET prototypicality=" +
+							 * rs2.getString("prototypicality") +
+							 * ", familiarity=" + rs2.getString("familiarity") +
+							 * ", vitalization=" + rs2.getString("vitalization")
+							 * + ", pleasant=" + rs2.getString("pleasant") +
+							 * " WHERE '" + rs2.getString("emotionword") +
+							 * "' like '" + rs.getString("mresult") + "%'");
+							 */
+							statement1.executeUpdate("UPDATE MORPHRESULT SET prototypicality="
+									+ rs2.getString("prototypicality") + ", familiarity=" + rs2.getString("familiarity")
+									+ ", vitalization=" + rs2.getString("vitalization") + ", pleasant="
+									+ rs2.getString("pleasant") + " WHERE mresult='" + rs.getString("mresult") + "'");
+							// 섭섭하다 like 섭섭~
+						}
 					}
-				} else {
+				} 
+				
+
+/*				else {
 					// 모든 저장된 값
 					System.out.println("포함 하지 않는 " + rs.getString("mresult"));
 					Statement statement2 = conn.createStatement();
@@ -130,7 +143,7 @@ public class EmotionServlet extends HttpServlet {
 							"UPDATE MORPHRESULT SET prototypicality=0, familiarity=0, vitalization=0, pleasant=0 where mresult='"
 									+ rs.getString("mresult") + "'");
 
-				}
+				}*/
 			}
 			/*
 			 * if(rs.getDouble("prototypicality")==0) { Statement statement2 =
@@ -154,10 +167,8 @@ public class EmotionServlet extends HttpServlet {
 			request.setAttribute("emotions", emotions);
 
 			response.setContentType("text/html; charset=UTF-8");
-			// RequestDispatcher rd =
-			// request.getRequestDispatcher("/bookstore/Bookorder.jsp");
-			// rd.include(request, response);
-
+			 RequestDispatcher rd = request.getRequestDispatcher("/stt/finalresult.jsp");
+             rd.include(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("error", e);

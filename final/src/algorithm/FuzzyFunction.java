@@ -22,7 +22,7 @@ public class FuzzyFunction {
 
 			result = (int) ((a * vitali + b) * 100) / 100.0;
 			results.add(result);
-			results.add(1.0);
+			//results.add(1.0);
 		}
 
 		else if (3.0 <= vitali && vitali < 5.0) {
@@ -36,9 +36,9 @@ public class FuzzyFunction {
 			result2 = (int) ((a2 * vitali + b2) * 100) / 100.0;
 
 			results.add(result);
-			results.add(1.0);
+			//results.add(1.0);
 			results.add(result2);
-			results.add(2.0);
+			//results.add(2.0);
 		}
 
 		else { // x범위가 5~7
@@ -52,9 +52,9 @@ public class FuzzyFunction {
 			result2 = (int) ((a2 * vitali + b2) * 100) / 100.0;
 
 			results.add(result);
-			results.add(2.0);
+			//results.add(2.0);
 			results.add(result2);
-			results.add(3.0);
+			//results.add(3.0);
 		}
 		return results;
 	}
@@ -76,7 +76,7 @@ public class FuzzyFunction {
 
 			result = (int) ((a * plea + b) * 100) / 100.0;
 			results.add(result);
-			results.add(1.0);
+			//results.add(1.0);
 		}
 
 		else if (2.5 <= plea && plea < 4.0) {
@@ -90,9 +90,9 @@ public class FuzzyFunction {
 			result2 = (int) ((a2 * plea + b2) * 100) / 100.0;
 
 			results.add(result);
-			results.add(1.0);
+			//results.add(1.0);
 			results.add(result2);
-			results.add(2.0);
+			//results.add(2.0);
 		}
 		
 		else if (4.0 <= plea && plea < 5.5) {
@@ -106,9 +106,9 @@ public class FuzzyFunction {
 			result2 = (int) ((a2 * plea + b2) * 100) / 100.0;
 
 			results.add(result);
-			results.add(2.0);
+			//results.add(2.0);
 			results.add(result2);
-			results.add(3.0);
+			//results.add(3.0);
 		}
 
 		else { // x범위가 5.5~7
@@ -122,9 +122,9 @@ public class FuzzyFunction {
 			result2 = (int) ((a2 * plea + b2) * 100) / 100.0;
 
 			results.add(result);
-			results.add(3.0);
+			//results.add(3.0);
 			results.add(result2);
-			results.add(4.0);
+			//results.add(4.0);
 		}
 		return results;
 	}

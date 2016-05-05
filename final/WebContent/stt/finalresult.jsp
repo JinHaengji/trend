@@ -10,5 +10,9 @@
 <form method="GET" action="finalresult">
 	<input type="submit" value="감정단어총개수">
 </form>
+<br>
+<form method="GET" action="fuzzy">
+	<input type="submit" value="퍼지">
+</form>
 </body>
 </html>

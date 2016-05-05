@@ -26,7 +26,10 @@ public class FuzzyServlet extends HttpServlet {
     private double pleasant; //쾌.불쾌 점수
     private double vitalization; //활성화 점수
     private Vector<Double> fresult = new Vector<Double>(); //블랙리스트에 영향을 줄 수 있는 정도 (불쾌 단어의 지수)
-    
+    private Vector<Double> pp = new Vector<Double>(); 
+    private Vector<Double> vv = new Vector<Double>(); 
+    private Vector<Double> res = new Vector<Double>(); 
+    private FuzzyFunction fc = new FuzzyFunction();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -76,10 +79,28 @@ public class FuzzyServlet extends HttpServlet {
 	            		  vitalization = rs.getDouble("vitalization"); //활성화
 	            		  
 	            		  //행지꺼 먼저
-	            		  //쾌.불쾌 y값 최대 2개, 활성화 y값 최대 2개가 리턴됨
+	            		  //쾌.불쾌 y값 최대 2개, 활성화 y값 최대 2개가 vector로 리턴됨
+	            		  pp = fc.funcPlea(pleasant);
+	            		  vv = fc.funcVitali(vitalization);
 	            		  
+	            		  //표에서 해당하는 각 fresult들 가져옴
+	            		  res = getFResult(pleasant, vitalization);
 	            		  
+	            		  //테스트
+	            		  for (int i = 0; i < pp.size(); i++) {
+	            				Object obj = vv.get(i);
+	            				System.out.println("쾌.불쾌 y값 : " + (double) obj);
+	            			}
 	            		  
+	            		  for (int i = 0; i < vv.size(); i++) {
+	            				Object obj = vv.get(i);
+	            				System.out.println("활성화 y값 : " + (double) obj);
+	            			}
+	            		  
+	            		  for (int i = 0; i < res.size(); i++) {
+	            				Object obj = res.get(i);
+	            				System.out.println("표 값 : " + (double) obj);
+	            			}
 	            	  }
 	              }
 	              
@@ -90,7 +111,7 @@ public class FuzzyServlet extends HttpServlet {
 	    }
 	}
 	
-	public Vector getFResult(double pleasant, double vitalization)
+	public Vector<Double> getFResult(double pleasant, double vitalization)
 	{
 		Vector<Double> ff = new Vector<Double>(); //블랙리스트에 영향을 줄 수 있는 정도 (불쾌 단어의 지수)
 		

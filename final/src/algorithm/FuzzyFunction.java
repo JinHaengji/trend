@@ -116,6 +116,7 @@ public class FuzzyFunction {
 		return results;
 	}
 
+	//테스트 -> 의미X
 	public static void main(String[] args) {
 		Vector<Double> results_ = new Vector<Double>();
 		results_ = funcPlea(4.33);

@@ -90,7 +90,7 @@ public class EmotionServlet extends HttpServlet {
 						&& (rs.getString("mresult").length() >= 2)) {
 					System.out.println("포함 하는 " + rs.getString("mresult"));
 					ResultSet rs2 = null;
-					Statement statement = conn.createStatement();
+					Statement statement = conn.createStatement();	
 					// 섭섭하다, 걱정되다
 					/*
 					 * rs2 = statement.executeQuery(
@@ -98,12 +98,12 @@ public class EmotionServlet extends HttpServlet {
 					 * + rs.getString("mresult") + "%'");
 					 */
 					rs2 = statement.executeQuery(
-							"SELECT emotionword, prototypicality, familiarity, vitalization, pleasant FROM emotiondic");
+							"SELECT emotionword, prototypicality, familiarity, pleasant, vitalization FROM emotiondic");
 					
 					//일단 0으로 초기화
 					Statement statement2 = conn.createStatement();
 					statement2.executeUpdate(
-							"UPDATE MORPHRESULT SET prototypicality=0, familiarity=0, vitalization=0, pleasant=0 where mresult='"
+							"UPDATE MORPHRESULT SET prototypicality=0, familiarity=0, pleasant=0 , vitalization=0 where mresult='"
 									+ rs.getString("mresult") + "'");
 					// 감정사전 단어 다 가져오기
 					while (rs2.next()) {
@@ -127,8 +127,9 @@ public class EmotionServlet extends HttpServlet {
 							 */
 							statement1.executeUpdate("UPDATE MORPHRESULT SET prototypicality="
 									+ rs2.getString("prototypicality") + ", familiarity=" + rs2.getString("familiarity")
-									+ ", vitalization=" + rs2.getString("vitalization") + ", pleasant="
-									+ rs2.getString("pleasant") + " WHERE mresult='" + rs.getString("mresult") + "'");
+									+ ", pleasant=" + rs2.getString("pleasant") 
+									+ ", vitalization=" + rs2.getString("vitalization") 
+									+ " WHERE mresult='" + rs.getString("mresult") + "'");
 							// 섭섭하다 like 섭섭~
 						}
 					}
@@ -140,7 +141,7 @@ public class EmotionServlet extends HttpServlet {
 					System.out.println("포함 하지 않는 " + rs.getString("mresult"));
 					Statement statement2 = conn.createStatement();
 					statement2.executeUpdate(
-							"UPDATE MORPHRESULT SET prototypicality=0, familiarity=0, vitalization=0, pleasant=0 where mresult='"
+							"UPDATE MORPHRESULT SET prototypicality=0, familiarity=0, pleasant=0, vitalization=0 where mresult='"
 									+ rs.getString("mresult") + "'");
 
 				}

@@ -83,7 +83,10 @@ public class FuzzyServlet extends HttpServlet {
 			while (rs.next()) {
 				Vector<Double> min = new Vector<Double>();
 
-				
+		        minsum=0;
+	            sum=0;
+	            fuzzy=0;
+	            
 				// 감정단어인 것만 해당
 				if (rs.getDouble("pleasant") > 0) {
 					pleasant = rs.getDouble("pleasant"); // 쾌.불쾌
@@ -134,9 +137,14 @@ public class FuzzyServlet extends HttpServlet {
 						sum+=res.get(i)*min.get(i);
 					}
 					
-					fuzzy=sum/minsum;
+					//fuzzy=sum/minsum;
+					fuzzy = (int) ((sum/minsum) * 100) / 100.0;
 					System.out.println(sum);	
 					System.out.println(fuzzy);	
+					
+					//fuzzy db에 저장
+					Statement statement1 = conn.createStatement();
+					statement1.executeUpdate("UPDATE MORPHRESULT SET fuzzy = " + fuzzy + " WHERE mresult='" + rs.getString("mresult") + "'");
 				}
 			}
 

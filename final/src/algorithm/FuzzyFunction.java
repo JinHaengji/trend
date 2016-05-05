@@ -4,8 +4,9 @@ import java.util.Vector;
 
 public class FuzzyFunction {
 
-	public static Vector<Double> funcVitali(double vitali) { // 활성화 함수
-		Vector<Double> results = new Vector<Double>();
+	public Vector<Double> funcVitali(double vitali) { // 활성화 함수
+		Vector<Double> results = new Vector<Double>(); //활성화 값
+		
 
 		double result; // 결과값
 		double result2; // 결과값
@@ -21,6 +22,7 @@ public class FuzzyFunction {
 
 			result = (int) ((a * vitali + b) * 100) / 100.0;
 			results.add(result);
+			results.add(1.0);
 		}
 
 		else if (3.0 <= vitali && vitali < 5.0) {
@@ -34,7 +36,9 @@ public class FuzzyFunction {
 			result2 = (int) ((a2 * vitali + b2) * 100) / 100.0;
 
 			results.add(result);
+			results.add(1.0);
 			results.add(result2);
+			results.add(2.0);
 		}
 
 		else { // x범위가 5~7
@@ -48,12 +52,14 @@ public class FuzzyFunction {
 			result2 = (int) ((a2 * vitali + b2) * 100) / 100.0;
 
 			results.add(result);
+			results.add(2.0);
 			results.add(result2);
+			results.add(3.0);
 		}
 		return results;
 	}
 	
-	public static Vector<Double> funcPlea(double plea) { // 쾌/불쾌 함수
+	public Vector<Double> funcPlea(double plea) { // 쾌/불쾌 함수
 		Vector<Double> results = new Vector<Double>();
 
 		double result; // 결과값
@@ -70,6 +76,7 @@ public class FuzzyFunction {
 
 			result = (int) ((a * plea + b) * 100) / 100.0;
 			results.add(result);
+			results.add(1.0);
 		}
 
 		else if (2.5 <= plea && plea < 4.0) {
@@ -83,7 +90,9 @@ public class FuzzyFunction {
 			result2 = (int) ((a2 * plea + b2) * 100) / 100.0;
 
 			results.add(result);
+			results.add(1.0);
 			results.add(result2);
+			results.add(2.0);
 		}
 		
 		else if (4.0 <= plea && plea < 5.5) {
@@ -97,7 +106,9 @@ public class FuzzyFunction {
 			result2 = (int) ((a2 * plea + b2) * 100) / 100.0;
 
 			results.add(result);
+			results.add(2.0);
 			results.add(result2);
+			results.add(3.0);
 		}
 
 		else { // x범위가 5.5~7
@@ -111,21 +122,23 @@ public class FuzzyFunction {
 			result2 = (int) ((a2 * plea + b2) * 100) / 100.0;
 
 			results.add(result);
+			results.add(3.0);
 			results.add(result2);
+			results.add(4.0);
 		}
 		return results;
 	}
 
 	//테스트 -> 의미X
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		Vector<Double> results_ = new Vector<Double>();
-		results_ = funcPlea(4.33);
+		results_ = funcPlea(6.16);
 
 		for (int i = 0; i < results_.size(); i++) {
 			Object obj = results_.get(i);
 			System.out.println((double) obj);
 		}
 
-	}
+	}*/
 
 }

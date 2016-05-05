@@ -63,6 +63,7 @@ public class FuzzyServlet extends HttpServlet {
 	              stmt = conn.createStatement();
 	              System.out.println("제대로 연결되었습니다.");    
 	              
+	              //감정 추출한 것에서
 	              //현재 고객의 id인것만 가져오기
 	              String sql = String.format("SELECT * FROM MORPHRESULT WHERE id = '" + id + "'");              
 	              PreparedStatement pstmt=null;
@@ -72,8 +73,8 @@ public class FuzzyServlet extends HttpServlet {
 	              
 	              while(rs.next()) 
 	              {
-	            	  //타입이 N 이나 V 인것만 해당
-	            	  if (rs.getString("TYPE").equals("V") || rs.getString("TYPE").equals("N")) 
+	            	  //감정단어인 것만 해당
+	            	  if (rs.getDouble("pleasant")>0) 
 	            	  {
 	            		  pleasant = rs.getDouble("pleasant"); //쾌.불쾌
 	            		  vitalization = rs.getDouble("vitalization"); //활성화
@@ -88,7 +89,7 @@ public class FuzzyServlet extends HttpServlet {
 	            		  
 	            		  //테스트
 	            		  for (int i = 0; i < pp.size(); i++) {
-	            				Object obj = vv.get(i);
+	            				Object obj = pp.get(i);
 	            				System.out.println("쾌.불쾌 y값 : " + (double) obj);
 	            			}
 	            		  
@@ -125,21 +126,21 @@ public class FuzzyServlet extends HttpServlet {
 		  if((pleasant>=5.50 && pleasant<=7.00) && (vitalization>=5.00 && vitalization<=7.00)) //쾌&많이 표현
 			  ff.add(2.50); //안줌
 		  
-		  if((pleasant>=4.00 && pleasant<7.00) && (vitalization>=1.00 && vitalization<3.00)) //조금 쾌&적게 표현
+		  if((pleasant>=4.00 && pleasant<7.00) && (vitalization>=1.00 && vitalization<5.00)) //조금 쾌&적게 표현
 			  ff.add(4.00); //조금
 		  if((pleasant>=4.00 && pleasant<7.00) && (vitalization>=3.00 && vitalization<7.00)) //조금 쾌&보통
 			  ff.add(4.00); //조금
 		  if((pleasant>=4.00 && pleasant<7.00) && (vitalization>=5.00 && vitalization<=7.00)) //조금 쾌&많이 표현
 			  ff.add(4.00); //조금
 		  
-		  if((pleasant>=2.50 && pleasant<5.50) && (vitalization>=1.00 && vitalization<3.00)) //조금 불쾌&적게 표현
+		  if((pleasant>=2.50 && pleasant<5.50) && (vitalization>=1.00 && vitalization<5.00)) //조금 불쾌&적게 표현
 			  ff.add(4.00); //조금
 		  if((pleasant>=2.50 && pleasant<5.50) && (vitalization>=3.00 && vitalization<7.00)) //조금 불쾌&보통
 			  ff.add(5.50); //많이
 		  if((pleasant>=2.50 && pleasant<5.50) && (vitalization>=5.00 && vitalization<=7.00)) //조금 불쾌&많이 표현
 			  ff.add(5.50); //많이
 		  
-		  if((pleasant>=1.00 && pleasant<4.00) && (vitalization>=1.00 && vitalization<3.00)) //불쾌&적게 표현
+		  if((pleasant>=1.00 && pleasant<4.00) && (vitalization>=1.00 && vitalization<5.00)) //불쾌&적게 표현
 			  ff.add(5.50); //많이
 		  if((pleasant>=1.00 && pleasant<4.00) && (vitalization>=3.00 && vitalization<7.00)) //불쾌&보통
 			  ff.add(7.00); //매우 많이

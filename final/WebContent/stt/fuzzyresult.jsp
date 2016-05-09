@@ -4,15 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Fuzzy</title>
+<title>Fuzzy 결과</title>
 </head>
 <body>
-<form method="GET" action="finalresult">
-	<input type="submit" value="감정단어총개수">
-</form>
-<br>
-<form method="GET" action="fuzzy">
-	<input type="submit" value="퍼지">
+<form method="GET" action="unpratio">
+	<input type="submit" value="불쾌단어 비율">
 </form>
 </body>
 </html>

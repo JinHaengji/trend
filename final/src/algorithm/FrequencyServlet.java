@@ -1,4 +1,4 @@
-package speech;
+package algorithm;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,19 +16,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/stt/finalresult")
-public class ResultServlet extends HttpServlet {
+/**
+ * Servlet implementation class FrequencyServlet
+ */
+@WebServlet("/stt/frequency")
+public class FrequencyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private double emocount;
-	private double allcount;
-	private double unpercent;
 	private int id;
-	private String customer = "";
-	private String counsellor = "";
-	private int i = 1;
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public FrequencyServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		//불쾌 단어 사이의 단어 개수 구하기
+		
 		Connection conn = null;
         Statement stmt = null;
         
@@ -49,7 +59,8 @@ public class ResultServlet extends HttpServlet {
 	              stmt = conn.createStatement();
 	              System.out.println("제대로 연결되었습니다.");    
 	              
-	              String sql = String.format("SELECT COUNT(*) AS \"cnt\" FROM MORPHRESULT WHERE prototypicality > 0 and fuzzy >= 4.0 and id = " + id);              
+	              //불쾌단어(fuzzy>=4.0)인걸 만나면 
+	              String sql = String.format("SELECT * FROM MORPHRESULT WHERE fuzzy >= 4.0 and id = " + id);              
 	              PreparedStatement pstmt=null;
 	              pstmt = conn.prepareStatement(sql);
 	              ResultSet rs = null;
@@ -57,11 +68,12 @@ public class ResultServlet extends HttpServlet {
 	              
 	              while(rs.next()) 
 	              {
-	            	  emocount = rs.getDouble("cnt");
+	            	  //emocount = rs.getDouble("cnt");
+	            	  
 	              }
-	              System.out.println("불쾌 단어의 개수는 "+emocount+"개 입니다.");
+	              //System.out.println("불쾌 단어의 개수는 "+emocount+"개 입니다.");
 	              
-	              String sql2 = String.format("SELECT COUNT(*) AS \"cnt\" FROM MORPHRESULT WHERE id = " + id);
+	              /*String sql2 = String.format("SELECT COUNT(*) AS \"cnt\" FROM MORPHRESULT WHERE id = " + id);
 	              PreparedStatement pstmt2=null;
 	              pstmt2 = conn.prepareStatement(sql2);
 	              ResultSet rs2 = null;
@@ -93,28 +105,12 @@ public class ResultServlet extends HttpServlet {
 		              PreparedStatement statement1 = conn.prepareStatement(query);
 					statement1.execute();
 	              }
-	              System.out.println("customerdb에 저장됨");
 	              
-	              //morphresult의 해당 고객 id에 대해서 각각의 행마다 id를 따로 주기
-	              /*String sql4 = String.format("SELECT * FROM morphresult WHERE id = " + id);
-	              PreparedStatement pstmt4=null;
-	              pstmt4 = conn.prepareStatement(sql4);
-	              ResultSet rs4 = null;
-	              rs4 = pstmt4.executeQuery(); //SELECT 쿼리인 경우
-	              
-	              
-	              while(rs4.next())
-	              {
-	            	  Statement st5 = conn.createStatement();
-		              st5.executeUpdate("update morphresult set rowid = " + i + " where id = " + id + " and mresult = '" + rs4.getString("mresult") + "'");
-		              i++;
-	              }
-	              
-	              System.out.println("rowid 저장됨");*/
 				
+				System.out.println("customerdb에 저장됨");*/
 				
 				response.setContentType("text/html; charset=UTF-8");
-				 RequestDispatcher rd = request.getRequestDispatcher("/stt/wordcount.jsp");
+				 RequestDispatcher rd = request.getRequestDispatcher("/stt/.jsp");
 	             rd.include(request, response);
 	              
 	    } catch (Exception e)
@@ -122,4 +118,5 @@ public class ResultServlet extends HttpServlet {
 	         e.printStackTrace();
 	    }
 	}
+
 }

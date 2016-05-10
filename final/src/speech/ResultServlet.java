@@ -24,6 +24,7 @@ public class ResultServlet extends HttpServlet {
 	private int id;
 	private String customer = "";
 	private String counsellor = "";
+	//private int freq;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
@@ -53,19 +54,19 @@ public class ResultServlet extends HttpServlet {
 	              ResultSet rs = null;
 	              rs = pstmt.executeQuery(); //SELECT 쿼리인 경우
 	              
-	              while(rs.next()) 
+	              while(rs.next()) //불쾌단어 개수
 	              {
 	            	  emocount = rs.getDouble("cnt");
 	              }
 	              System.out.println("불쾌 단어의 개수는 "+emocount+"개 입니다.");
-	              
+	              	              
 	              String sql2 = String.format("SELECT COUNT(*) AS \"cnt\" FROM MORPHRESULT WHERE id = " + id);
 	              PreparedStatement pstmt2=null;
 	              pstmt2 = conn.prepareStatement(sql2);
 	              ResultSet rs2 = null;
 	              rs2 = pstmt2.executeQuery(); //SELECT 쿼리인 경우
 	              
-	              while(rs2.next()) 
+	              while(rs2.next()) //단어 총 개수
 	              {
 	            	  allcount = rs2.getDouble("cnt");
 	              }
@@ -94,6 +95,25 @@ public class ResultServlet extends HttpServlet {
 	              
 				
 				System.out.println("customerdb에 저장됨");
+				
+	              //현재 고객에 대한 테이블 가져오기
+	              String sql4 = String.format("SELECT * FROM MORPHRESULT WHERE id = " + id);
+	              PreparedStatement pstmt4=null;
+	              pstmt4 = conn.prepareStatement(sql4);
+	              ResultSet rs4 = null;
+	              rs4 = pstmt4.executeQuery();
+	              int freq=0;
+	              while(rs4.next()) //단어 총 개수
+	              {
+	            	  if(rs4.getDouble("fuzzy") > 0){
+	            		  freq++;
+	            	  } 
+	            	  else{
+	            		  System.out.println(freq);
+            		  //freq=0;
+	            	  }
+	              }
+	              System.out.println(freq);
 	              
 	    } catch (Exception e)
 	    {

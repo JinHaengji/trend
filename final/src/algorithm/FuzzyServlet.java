@@ -149,15 +149,12 @@ public class FuzzyServlet extends HttpServlet {
 				}
 			}
 
-<<<<<<< HEAD
+
 			//fuzzyresult.jsp로 넘어감
 			//response.setContentType("text/html; charset=UTF-8");
 			 //RequestDispatcher rd = request.getRequestDispatcher("/stt/fuzzyresult.jsp");
             //rd.include(request, response);
-=======
-			
-			
->>>>>>> c80175b7f5c2cda7ab465107a8dc1daeb1a2e4d8
+
             
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -25,11 +25,10 @@ public class ResultServlet extends HttpServlet {
 	private int id;
 	private String customer = "";
 	private String counsellor = "";
-<<<<<<< HEAD
+
 	private int i = 1;
-=======
+
 	//private int freq;
->>>>>>> c80175b7f5c2cda7ab465107a8dc1daeb1a2e4d8
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
@@ -117,11 +116,11 @@ public class ResultServlet extends HttpServlet {
 	              System.out.println("rowid 저장됨");*/
 				
 				
-<<<<<<< HEAD
+
 				response.setContentType("text/html; charset=UTF-8");
 				 RequestDispatcher rd = request.getRequestDispatcher("/stt/wordcount.jsp");
 	             rd.include(request, response);
-=======
+
 				System.out.println("customerdb에 저장됨");
 				
 	              //현재 고객에 대한 테이블 가져오기
@@ -142,7 +141,7 @@ public class ResultServlet extends HttpServlet {
 	            	  }
 	              }
 	              System.out.println(freq);
->>>>>>> c80175b7f5c2cda7ab465107a8dc1daeb1a2e4d8
+
 	              
 	    } catch (Exception e)
 	    {

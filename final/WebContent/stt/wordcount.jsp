@@ -19,7 +19,7 @@ $(function () {
             text: '±×·¡ÇÁ'
         },
         xAxis: {
-            categories: [1 , 2, 3, 4, 5, 6, 7, 8, 9]
+            categories: [1 , 2, 3, 4, 5, 6, 7, 8, 9, 10]
         },
         yAxis: {
             title: {
@@ -36,7 +36,7 @@ $(function () {
         },
         series: [{
             name: 'Tokyo',
-            data: [0,0,0, 0, 0, 0, 1, 1, 1]
+            data: [0,0,0, 0, 0, 0, 1, 1, 2,2]
         }]
     });
 });

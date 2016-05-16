@@ -52,7 +52,7 @@ public class ResultServlet extends HttpServlet {
 	              stmt = conn.createStatement();
 	              System.out.println("제대로 연결되었습니다.");    
 	              
-	              String sql = String.format("SELECT COUNT(*) AS \"cnt\" FROM MORPHRESULT WHERE prototypicality > 0 and fuzzy >= 4.0 and id = " + id);              
+	              String sql = String.format("SELECT COUNT(*) AS \"cnt\" FROM MORPHRESULT WHERE fuzzy >= 4.0 and id = " + id);              
 	              PreparedStatement pstmt=null;
 	              pstmt = conn.prepareStatement(sql);
 	              ResultSet rs = null;

@@ -28,7 +28,11 @@ public class ResultServlet extends HttpServlet {
 
 	private int i = 1;
 
+<<<<<<< HEAD
 	//private int freq;
+=======
+
+>>>>>>> 9f957200c1696d4bbbd6e7be87fae7d92e61e345
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
@@ -98,6 +102,7 @@ public class ResultServlet extends HttpServlet {
 	              }
 	              System.out.println("customerdb에 저장됨");
 	              
+<<<<<<< HEAD
 	              //morphresult의 해당 고객 id에 대해서 각각의 행마다 id를 따로 주기
 	              /*String sql4 = String.format("SELECT * FROM morphresult WHERE id = " + id);
 	              PreparedStatement pstmt4=null;
@@ -120,6 +125,8 @@ public class ResultServlet extends HttpServlet {
 	             //rd.include(request, response);
 
 
+=======
+>>>>>>> 9f957200c1696d4bbbd6e7be87fae7d92e61e345
 				System.out.println("customerdb에 저장됨");
 				
 	              //현재 고객에 대한 테이블 가져오기
@@ -129,6 +136,10 @@ public class ResultServlet extends HttpServlet {
 	              ResultSet rs4 = null;
 	              rs4 = pstmt4.executeQuery();
 	              int freq=0;
+	              int array[] = {0, };
+	              int i = 0;
+	              
+	              System.out.println("단어 빈도 수");
 	              while(rs4.next()) //단어 총 개수
 	              {
 	            	  if(rs4.getDouble("fuzzy") > 0){
@@ -136,6 +147,9 @@ public class ResultServlet extends HttpServlet {
 	            	  } 
 	            	  else{
 	            		  System.out.println(freq);
+	            		  //여기서 freq들 저장
+	            		  array[i] = freq;
+	            		  i++;
             		  //freq=0;
 	            	  }
 	              }
@@ -145,7 +159,10 @@ public class ResultServlet extends HttpServlet {
 					response.setContentType("text/html; charset=UTF-8");
 					 RequestDispatcher rd = request.getRequestDispatcher("/stt/wordcount.jsp");
 		             rd.include(request, response);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9f957200c1696d4bbbd6e7be87fae7d92e61e345
 	              
 	    } catch (Exception e)
 	    {

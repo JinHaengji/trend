@@ -18,7 +18,7 @@
         text-align: center;
       }
 </style>
-</head>
+</head>   
 <body>
    <h1>시작 페이지</h1>
    <form action="index" method="GET">

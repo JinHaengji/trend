@@ -79,7 +79,7 @@
   </table>
  <form method="post" name="morph">
   <table width="800" align="center">
-  <tr>
+  <tr> 
   <td>
 		<div style="font-size:18pt;text-align:center">한글 형태소분석 데모</div>
 		<div style="font-size:10pt;text-align:center;color:blue">한글형태소분석기입니다.</div>
@@ -90,7 +90,7 @@
   <td>
   <div style="text-align:center">
   <textarea name="input" rows="7" cols="100">
-  	<%= (String) session.getAttribute("trans") %>
+  	<%= (String) session.getAttribute("trans") %> <!-- 여기!!! -->
   </textarea>
   <div>
   <div style="text-align:right;margin-right:35px">

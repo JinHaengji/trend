@@ -98,28 +98,6 @@ public class ResultServlet extends HttpServlet {
 	              }
 	              System.out.println("customerdb에 저장됨");
 	              
-	              //morphresult의 해당 고객 id에 대해서 각각의 행마다 id를 따로 주기
-	              /*String sql4 = String.format("SELECT * FROM morphresult WHERE id = " + id);
-	              PreparedStatement pstmt4=null;
-	              pstmt4 = conn.prepareStatement(sql4);
-	              ResultSet rs4 = null;
-	              rs4 = pstmt4.executeQuery(); //SELECT 쿼리인 경우
-	              
-	              
-	              while(rs4.next())
-	              {
-	            	  Statement st5 = conn.createStatement();
-		              st5.executeUpdate("update morphresult set rowid = " + i + " where id = " + id + " and mresult = '" + rs4.getString("mresult") + "'");
-		              i++;
-	              }
-	              
-	              System.out.println("rowid 저장됨");*/
-				
-
-				
-
-
-
 				System.out.println("customerdb에 저장됨");
 				
 	              //현재 고객에 대한 테이블 가져오기
@@ -129,6 +107,10 @@ public class ResultServlet extends HttpServlet {
 	              ResultSet rs4 = null;
 	              rs4 = pstmt4.executeQuery();
 	              int freq=0;
+	              int array[] = {0, };
+	              int i = 0;
+	              
+	              System.out.println("단어 빈도 수");
 	              while(rs4.next()) //단어 총 개수
 	              {
 	            	  if(rs4.getDouble("fuzzy") > 0){
@@ -136,6 +118,9 @@ public class ResultServlet extends HttpServlet {
 	            	  } 
 	            	  else{
 	            		  System.out.println(freq);
+	            		  //여기서 freq들 저장
+	            		  array[i] = freq;
+	            		  i++;
             		  //freq=0;
 	            	  }
 	              }

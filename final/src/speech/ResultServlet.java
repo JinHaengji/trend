@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -21,11 +23,12 @@ public class ResultServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private double emocount;
 	private double allcount;
-	private double unpercent;
+	private int unpercent;
 	private int id;
 	private String customer = "";
 	private String counsellor = "";
-
+	private int size_all;
+	
 	private int i = 1;
 
 	
@@ -51,7 +54,9 @@ public class ResultServlet extends HttpServlet {
 	              stmt = conn.createStatement();
 	              System.out.println("제대로 연결되었습니다.");    
 	              
-	              String sql = String.format("SELECT COUNT(*) AS \"cnt\" FROM MORPHRESULT WHERE fuzzy >= 4.0 and id = " + id);              
+	              /////////////////////////////////////////////////////////////
+	              //기존 불쾌 단어 개수 비율
+	              /*String sql = String.format("SELECT COUNT(*) AS \"cnt\" FROM MORPHRESULT WHERE fuzzy >= 4.0 and id = " + id);              
 	              PreparedStatement pstmt=null;
 	              pstmt = conn.prepareStatement(sql);
 	              ResultSet rs = null;
@@ -63,7 +68,7 @@ public class ResultServlet extends HttpServlet {
 	              }
 	              System.out.println("불쾌 단어의 개수는 "+emocount+"개 입니다.");
 	              	              
-	              String sql2 = String.format("SELECT COUNT(*) AS \"cnt\" FROM MORPHRESULT WHERE id = " + id);
+	              String sql2 = String.format("SELECT COUNT(*) AS \"cnt\" FROM MORPHRESULT WHERE id = " + id + " and (type = 'N' or type = 'V')");
 	              PreparedStatement pstmt2=null;
 	              pstmt2 = conn.prepareStatement(sql2);
 	              ResultSet rs2 = null;
@@ -73,10 +78,39 @@ public class ResultServlet extends HttpServlet {
 	              {
 	            	  allcount = rs2.getDouble("cnt");
 	              }
-	              System.out.println("단어의 개수는 "+allcount+"개 입니다.");
+	              System.out.println("단어의 개수는 "+allcount+"개 입니다.");*/
 	              
+	              //////////////////////////////////////////////////////////////
+	            //(불쾌 단어들 퍼지값 합) / (전체 감정 단어 퍼지 값 합) 
+					String sql5 = String.format("SELECT * FROM MORPHRESULT WHERE id = " + id);
+		              PreparedStatement pstmt5=null;
+		              pstmt5 = conn.prepareStatement(sql5);
+		              ResultSet rs5 = null;
+		              rs5 = pstmt5.executeQuery();
+		              //int freq=0;
+		              double sum = 0; 
+		              double unsum = 0;
+		              
+		              while(rs5.next()) 
+		              {
+		            	  if(rs5.getDouble("fuzzy") >= 4.0)
+		            	  {
+		            		  unsum += rs5.getDouble("fuzzy");
+		            		  sum += rs5.getDouble("fuzzy");
+		            	  }
+		            	  else
+		            	  {
+		            		  sum += rs5.getDouble("fuzzy");
+		            	  }
+		            	  
+		              }
+		              
+		              System.out.println("(불쾌 단어들 퍼지값 합) / (전체 감정 단어 퍼지 값 합) : " + (int) ((unsum / sum*100) * 100) / 100.0);
+		              System.out.println("unsum : " + unsum);
+		              System.out.println("sum : " + sum);
+		              
 	              //unpercent = (emocount/allcount*100);
-	              unpercent = (int) ((emocount/allcount*100) * 100) / 100.0;
+	              unpercent = (int) ((unsum / sum*100) * 100) / 100;
 	              System.out.println("불쾌 단어 비율은 "+unpercent+"% 입니다.");
 	              //바인딩 데이터 연결하는 과정
 	             
@@ -94,6 +128,7 @@ public class ResultServlet extends HttpServlet {
 		              String query = "insert into customerdb(cusid, customer, counsellor, unpratio) values(" + id + ", '" + rs3.getString("customer") + "', '" + rs3.getString("counsellor") + "', " + unpercent + ")";
 		              PreparedStatement statement1 = conn.prepareStatement(query);
 					statement1.execute();
+					customer = rs3.getString("customer");
 	              }
 	              System.out.println("customerdb에 저장됨");
 	              
@@ -121,32 +156,99 @@ public class ResultServlet extends HttpServlet {
 
 				System.out.println("customerdb에 저장됨");
 				
+				///////////////////////////////////////////////////////////
+				
+				//불쾌 단어 사이 거리 구하기
 	              //현재 고객에 대한 테이블 가져오기
-	              String sql4 = String.format("SELECT * FROM MORPHRESULT WHERE id = " + id);
+	              /*String sql4 = String.format("SELECT * FROM MORPHRESULT WHERE id = " + id);
 	              PreparedStatement pstmt4=null;
 	              pstmt4 = conn.prepareStatement(sql4);
 	              ResultSet rs4 = null;
 	              rs4 = pstmt4.executeQuery();
 	              int freq=0;
-	              int array[] = {0, };
+	              //int array[] = {};
+	              Vector<Integer> array = new Vector<Integer>();
+	              Vector<Integer> dist = new Vector<Integer>();
+	              
+	              HashMap<String, Integer> hm = new HashMap<String, Integer>();
 	              int i = 0;
 	              
-	              System.out.println("단어 빈도 수");
+	              //System.out.println("단어 빈도 수");
 	              while(rs4.next()) //단어 총 개수
 	              {
-	            	  if(rs4.getDouble("fuzzy") > 0){
+	            	  //각각 단어에 index를 준다 -> rowid
+	            	  //hashmap
+	            	  hm.put(rs4.getString("mresult"), i);
+	            	  i++;
+	            	  System.out.println(hm.get(rs4.getString("mresult")));  
+	            	  array.add(0);
+	            	  
+	            	//불쾌 단어 만나면
+	            	  if(rs4.getDouble("fuzzy") >= 4.00)
+	            	  {
 	            		  freq++;
-	            	  } 
-	            	  else{
 	            		  System.out.println(freq);
 	            		  //여기서 freq들 저장
-	            		  array[i] = freq;
-	            		  i++;
-            		  //freq=0;
+	            		  //array[i] = freq;
+	            		  //i++;
+	            		  array.add(freq);
+	            		  
+	            		  //그때의 hashmap의 value값을 얻어서 vector에 저장한다
+	            		  array.add(hm.get(rs4.getString("mresult")));
+	            	  } 
+	              }
+	              
+	              System.out.println("단어사이거리");
+	              for(int j = 0; j<array.size(); j++)
+	              {
+	            	System.out.println(array.get(j));  
+	            	
+	            	dist.add(array.get(j+1)-array.get(j));
+	              }*/
+	              
+				/////////////////////////////////////////////////////////////
+				//그래프 넘기기
+				String sql6 = String.format("SELECT * FROM MORPHRESULT WHERE id = " + id);
+	              PreparedStatement pstmt6=null;
+	              pstmt6 = conn.prepareStatement(sql6);
+	              ResultSet rs6 = null;
+	              rs6 = pstmt6.executeQuery();
+	              Vector<Integer> vc  = new Vector<Integer>();
+	              int countsum = 0; 
+	              int countunsum = 0; //불쾌 단어 개수
+	              
+	              
+	              while(rs6.next()) //단어 총 개수
+	              {
+	            	  if(rs6.getDouble("fuzzy") >= 4.00) //불쾌 단어를 만나면
+	            	  {
+	            		  vc.add(++countsum);
+	            		  ++countunsum;
+	            	  }
+	            	  else //불쾌 단어가 아닌 감정단어거나 그냥 단어를 만났을 때
+	            	  {
+	            		  vc.add(countsum);
 	            	  }
 	              }
-	              System.out.println(freq);
-
+	              
+	              size_all = vc.size();
+	              int array[] = new int[size_all];
+	              
+	              System.out.println("vc내용 : ");
+	              for(int i = 0; i<vc.size(); i++)
+	              {
+	            	  System.out.println(vc.get(i));
+	            	  array[i] = vc.get(i);
+	              }
+	              
+	              //세션 값으로 넘겨주기
+	              //HttpSession session = request.getSession();
+	              session.setAttribute("vc", vc);
+	              session.setAttribute("array", array);
+	              session.setAttribute("countunsum", countunsum);
+	              session.setAttribute("customer", customer);
+	              session.setAttribute("unpercent", unpercent);
+	              ////////////////////////////////////////////////////////////////
 	              
 					response.setContentType("text/html; charset=UTF-8");
 					 RequestDispatcher rd = request.getRequestDispatcher("/stt/wordcount.jsp");

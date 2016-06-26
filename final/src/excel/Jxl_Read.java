@@ -42,7 +42,7 @@ public class Jxl_Read {
 
 		// System.out.print("학번t성명t비고tn"); // 엑셀 제목
 
-		for (int no = 0; no < 531; no++) { // 행의 갯수 만큼 돌리고
+		for (int no = 0; no < 532; no++) { // 행의 갯수 만큼 돌리고
 			for (int i = 0; i < 5; i++) { // 열의 갯수 만큼 돌려서
 				Cell myCell = mySheet.getCell(i, no); // 셀의 행과 열의 정보를 가져옴
 				
@@ -57,7 +57,7 @@ public class Jxl_Read {
 				// Quick and dirty function to return the contents of this cell
 				// as a string. 이라고 API에 쓰여 있더군요.
 			}
-			  insert_sql = "INSERT INTO emotiondic(emotionword,prototypicality,familiarity,vitalization,pleasant) values('"
+			  insert_sql = "INSERT INTO emotiondic(emotionword,prototypicality,familiarity,pleasant, vitalization) values('"
 				         + emotionword + "',"
 				         + prototypicality + ","
 				         + familiarity + ","

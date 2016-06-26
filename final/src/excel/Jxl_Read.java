@@ -57,7 +57,7 @@ public class Jxl_Read {
 				// Quick and dirty function to return the contents of this cell
 				// as a string. 이라고 API에 쓰여 있더군요.
 			}
-			  insert_sql = "INSERT INTO emotiondic(emotionword,prototypicality,familiarity,vitalization,pleasant) values('"
+			  insert_sql = "INSERT INTO emotiondic(emotionword,prototypicality,familiarity,pleasant, vitalization) values('"
 				         + emotionword + "',"
 				         + prototypicality + ","
 				         + familiarity + ","

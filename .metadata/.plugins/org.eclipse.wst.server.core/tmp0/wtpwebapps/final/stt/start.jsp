@@ -79,7 +79,7 @@
   </table>
  <form method="post" name="morph">
   <table width="800" align="center">
-  <tr>
+  <tr> 
   <td>
 		<div style="font-size:18pt;text-align:center">한글 형태소분석 데모</div>
 		<div style="font-size:10pt;text-align:center;color:blue">한글형태소분석기입니다.</div>
@@ -90,7 +90,23 @@
   <td>
   <div style="text-align:center">
   <textarea name="input" rows="7" cols="100">
-  	<%= (String) session.getAttribute("trans") %>
+ 뭘 똑바로 해? 이 씨발 미친건가 니 상담실 맞나 상담실을 이따구로 하냐 너 구청 뭐 야 너 이름이 뭐야 너는 내 정보 다 알고있잖아 야 너 말 다했냐
+너 말 다했냐고
+야이 시발년아
+이따구로 하냐
+존나 기분나빠
+아 그래
+양아치냐
+너 이름 뭔데
+미친년이네 이거
+너 뭔데
+실장이냐
+어느 사 실장인데
+내가 알아야 너를 고발할거아냐
+싸가지 없는 것을
+원래 다 그런다
+나는 너 목소리 다 녹음하고 있거든
+여보세요
   </textarea>
   <div>
   <div style="text-align:right;margin-right:35px">

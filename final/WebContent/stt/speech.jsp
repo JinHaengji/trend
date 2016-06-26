@@ -7,7 +7,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Web Speech API Demo</title>
+    <title>Customer Analysis System</title>
     <style>
       body
       {
@@ -19,7 +19,22 @@
       h1
       {
         text-align: center;
+        font-family: 'Impact';
+        color: #E95D3C;
       }
+      
+      h3
+      {
+      	font-family: Arial Narrow;
+      	color: #EDA900;
+      }
+      
+       span
+      {
+      	font-family: 'Impact';    	
+      	color: #E95D3C;
+      }
+      
 
       .buttons-wrapper
       {
@@ -36,7 +51,7 @@
       {
         display: block;
         width: 100%;
-        height: 5em;
+        height: 7em;
         overflow-y: scroll;
         border: 1px solid #333333;
         line-height: 1.3em;
@@ -48,29 +63,98 @@
         display: inline-block;
         margin: 1em auto;
       }
+      
+    input[type='radio'] {
+    	-webkit-appearance:none;
+    	width:20px;
+    	height:20px;
+    	border:1px solid darkgray;
+    	border-radius:50%;
+    	outline:none;
+    	box-shadow:0 0 5px 0px gray inset;
+	}
+
+	input[type='radio']:hover {
+    	box-shadow:0 0 5px 0px orange inset;
+	}
+
+	input[type='radio']:before {
+    	content:'';
+    	display:block;
+    	width:60%;
+    	height:60%;
+    	margin: 20% auto;    
+    	border-radius:50%;    
+	}
+	
+	input[type='radio']:checked:before {
+    	background: #E95D3C;
+	}
+
+	label {
+		font-family: 'MS Sans Serif'; 
+	}
+	
+	.button-demo {
+		background: #E95D3C;
+    	color: #fff;
+    	font-family: Lucida Console;
+    	font-size: 15px;
+    	height: 40px;
+    	width: 100px;
+    	line-height: 25px;
+    	margin: 25px 25px;
+    	text-align: center;
+    	border: 0;
+    	transition: all 0.3s ease 0s;
+	}
+
+
+	.button-demo:hover {
+ 		 background: #EDA900
+	}
+	
+	#anly {
+		background: #EDA900;
+    	color: #fff;
+    	font-family: Lucida Console;
+    	font-size: 15px;
+    	height: 40px;
+    	width: 100px;
+    	line-height: 25px;
+    	margin: 25px 25px;
+    	text-align: center;
+    	border: 0;
+    	transition: all 0.3s ease 0s;
+	}
+	
+	#anly:hover {
+ 		 background: #E95D3C
+	}
+	
     </style>
   </head>
   <body>
-    <h1>Web Speech API</h1>
-    <h2>Result</h2>
+    <h1>Customer Analysis System</h1>
+    <h3>Customer consultation</h3>
     <textarea id="transcription" readonly="readonly"></textarea>
 
-    <span>Results:</span>
+    <span> RESULTS:</span>
     <label><input type="radio" name="recognition-type" value="final" checked="checked" /> Final only</label>
     <label><input type="radio" name="recognition-type" value="interim" /> Interim</label>
 
-    <h3>ing</h3>
+    <h3>Connection</h3>
     <div id="log"></div>
 
     <div class="buttons-wrapper">
-      <button id="button-play-ws" class="button-demo">Play demo</button>
-      <button id="button-stop-ws" class="button-demo">Stop demo</button>
+      <button id="button-play-ws" class="button-demo">Play</button>
+      <button id="button-stop-ws" class="button-demo">Stop</button>
       <button id="clear-all" class="button-demo">Clear all</button>
       <form action="start.jsp" method="GET">
-      	<input type="submit" value="형태소 분석">
+      	<input id="anly" type="submit" value="형태소 분석">
       </form>
     </div>
-    <span id="ws-unsupported" class="hidden">Web Speech Api</span>
+    <span id="ws-unsupported" class="hidden"></span>
 
     <script>
       // Test browser support

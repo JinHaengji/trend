@@ -119,7 +119,7 @@ public class ResultServlet extends HttpServlet {
 				 //RequestDispatcher rd = request.getRequestDispatcher("/stt/wordcount.jsp");
 	             //rd.include(request, response);
 
-				System.out.println("customerdb에 저장됨");
+				//System.out.println("customerdb에 저장됨");
 				
 	              //현재 고객에 대한 테이블 가져오기
 	              String sql4 = String.format("SELECT * FROM MORPHRESULT WHERE id = " + id);
@@ -128,10 +128,11 @@ public class ResultServlet extends HttpServlet {
 	              ResultSet rs4 = null;
 	              rs4 = pstmt4.executeQuery();
 	              int freq=0;
-	              int array[] = {0, };
+	              int array[] = {};
 	              int i = 0;
 	              
 	              System.out.println("단어 빈도 수");
+	              /*
 	              while(rs4.next()) //단어 총 개수
 	              {
 	            	  if(rs4.getDouble("fuzzy") > 0){
@@ -146,7 +147,7 @@ public class ResultServlet extends HttpServlet {
 	            	  }
 	              }
 	              System.out.println(freq);
-
+*/
 	              
 					response.setContentType("text/html; charset=UTF-8");
 					 RequestDispatcher rd = request.getRequestDispatcher("/stt/wordcount.jsp");

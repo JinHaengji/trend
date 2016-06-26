@@ -1,28 +1,15 @@
-<<<<<<< HEAD
-INDEX VERSION 1.127+D:\trend2016\.metadata\.plugins\org.eclipse.jdt.core
-2667831626.index
-1250592570.index
-633662882.index
-1230307551.index
-2680410946.index
-793912968.index
-444554518.index
-170522541.index
-4169598414.index
-=======
 INDEX VERSION 1.127+C:\Users\wlsgo\Desktop\trend_\.metadata\.plugins\org.eclipse.jdt.core
 4042632457.index
 3362186211.index
-1826310000.index
+170522541.index
 1718475615.index
 1511427382.index
 223293647.index
 1520854059.index
 4049351217.index
+3766815368.index
 2643100498.index
 633662882.index
-3766815368.index
->>>>>>> 6d25660195f45938c2263c8634fdd8d13c52a8bb
 2975922945.index
 444554518.index
 793912968.index
@@ -34,12 +21,12 @@ INDEX VERSION 1.127+C:\Users\wlsgo\Desktop\trend_\.metadata\.plugins\org.eclipse
 3789739560.index
 2510163223.index
 1061093550.index
-3973491283.index
 1282606048.index
 528963955.index
+3973491283.index
 1216683187.index
-637598025.index
 2750295955.index
+637598025.index
 3766076148.index
 873380885.index
 1042840505.index
@@ -50,15 +37,10 @@ INDEX VERSION 1.127+C:\Users\wlsgo\Desktop\trend_\.metadata\.plugins\org.eclipse
 4193685296.index
 4160179269.index
 4286247586.index
-<<<<<<< HEAD
-528963955.index
-1826310000.index
-1042840505.index
-=======
+3655548618.index
 777769215.index
 1250592570.index
 2896800830.index
 76089508.index
+1826310000.index
 1228098616.index
-170522541.index
->>>>>>> 6d25660195f45938c2263c8634fdd8d13c52a8bb

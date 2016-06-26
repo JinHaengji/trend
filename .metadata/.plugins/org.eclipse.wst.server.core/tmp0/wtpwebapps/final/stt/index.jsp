@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>고객 상담 분석 시스템</title>
+<title>Customer Analysis System</title>
 <style>
       body
       {
@@ -16,15 +16,50 @@
       h1
       {
         text-align: center;
+        font-family: 'Impact';
+        color: #E95D3C;
       }
+      
+      label {
+      	font-family: Arial Narrow;
+      	color: #EDA900;
+      	font-size: 30px;
+      }
+      
+      .button-demo {
+		background: #E95D3C;
+    	color: #fff;
+    	font-family: Lucida Console;
+    	font-size: 15px;
+    	height: 40px;
+    	width: 100px;
+    	line-height: 25px;
+    	margin: 25px 25px;
+    	text-align: center;
+    	border: 0;
+    	transition: all 0.3s ease 0s;
+	}
+
+
+	.button-demo:hover {
+ 		 background: #EDA900
+	}
+	
+	      .buttons-wrapper
+      {
+        text-align: center;
+      }
+	
 </style>
 </head>   
 <body>
-   <h1>시작 페이지</h1>
+   <h1>Customer Analysis System</h1>
    <form action="index" method="GET">
-           고객 이름 : <input type="text" name="customer"><br>
-           상담사 이름 : <input type="text" name="counsellor"><br>
-            <input type="submit" value="시작">
+   <div class=buttons-wrapper> 
+          <label>Customer  : </label><input type="text" name="customer"><br>
+          <label>Counselor : </label><input type="text" name="counsellor"><br><br>
+          <input class="button-demo" type="submit" value="Start">
+    </div> 
     </form>
 </body>
 </html>

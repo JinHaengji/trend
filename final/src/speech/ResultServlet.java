@@ -238,10 +238,8 @@ public class ResultServlet extends HttpServlet {
 	            		  vc.add(countsum);
 	            	  }
 	              }
-<<<<<<< HEAD
-	              System.out.println(freq);
-*/
-=======
+
+	            
 	              
 	              size_all = vc.size();
 	              int array[] = new int[size_all];
@@ -261,7 +259,7 @@ public class ResultServlet extends HttpServlet {
 	              session.setAttribute("customer", customer);
 	              session.setAttribute("unpercent", unpercent);
 	              ////////////////////////////////////////////////////////////////
->>>>>>> a6c24597e075390e1bc88c789825253e880f1b49
+
 	              
 					response.setContentType("text/html; charset=UTF-8");
 					 RequestDispatcher rd = request.getRequestDispatcher("/stt/wordcount.jsp");

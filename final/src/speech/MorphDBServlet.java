@@ -1,6 +1,7 @@
 package speech;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -90,7 +91,13 @@ public class MorphDBServlet extends HttpServlet
 	              response.setContentType("text/html; charset=UTF-8");
 	              System.out.println("morphdb에 저장되었습니다.");
 	              //System.out.println("insert?");   
-	              RequestDispatcher rd = request.getRequestDispatcher("/stt/emotion.jsp");
+	              
+	  			PrintWriter out=response.getWriter(); 
+				out.println("<script language='javascript'>"); 
+				out.println("alert('db저장이 완료되었습니다.');"); 
+				out.println("</script>"); 
+	              
+	              RequestDispatcher rd = request.getRequestDispatcher("/stt/start.jsp");
 	              rd.include(request, response);
 	      } 
 	    catch (Exception e)

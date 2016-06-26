@@ -61,7 +61,7 @@
 }
 	
 	.h1 {
-	 	stext-align: center;
+	 	text-align: center;
         font-family: 'Impact';
         color: #E95D3C;
 	}
@@ -72,7 +72,7 @@
     	font-family: Lucida Console;
     	font-size: 13px;
     	height: 30px;
-    	width: 80px;
+    	width: 100px;
     	line-height: 20px;
     	margin: 10px 10px;
     	text-align: center;
@@ -85,7 +85,9 @@
  		 background: #EDA900
 	}
 	
-	
+	.ali {
+	margin-left: 500px;
+	}
 	</STYLE>
  </HEAD>
 
@@ -281,10 +283,29 @@ try
   </tr>
   </table>
 </form>  
-<form method="GET" action="morphdb">
-<div style="text-align:right;margin-right:310px">
-	<input class="button-demo" type="submit" value="DB저장하기">
+<div class="ali">
+<table>
+	<tr>
+		<td>
+		<form method="GET" action="morphdb">
+			<input class="button-demo" type="submit" value="DB 저장">
+		</form>
+		</td>
+		
+		<td>
+		<form method="GET" action="emotion">
+  			 <input class="button-demo" type="submit" value="감정 처리">
+		</form>
+		</td>
+		
+		<td>
+		<form method="GET" action="finalresult">
+  			 <input class="button-demo" type="submit" value="GRAPH 결과">
+		</form>
+		</td>
+	</tr>
+</table>
 </div>
-</form>
+
  </BODY>
 </HTML>

@@ -27,6 +27,7 @@
 
       h1
       {
+      	margin-top: 200px;
         text-align: center;
         font-family: 'Impact';
         color: #E95D3C;

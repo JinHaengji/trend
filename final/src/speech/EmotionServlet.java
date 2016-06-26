@@ -2,6 +2,7 @@ package speech;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -226,9 +227,14 @@ public class EmotionServlet extends HttpServlet {
 			//위에는 퍼지값
 			//////////////////////////////////////////////////////////////////////////////////////////////////////
 			request.setAttribute("emotions", emotions);
-
+						
+			PrintWriter out=response.getWriter(); 
+			out.println("<script language='javascript'>"); 
+			out.println("alert('감정처리를 완료했습니다.');"); 
+			out.println("</script>"); 
+			
 			response.setContentType("text/html; charset=UTF-8");
-			 RequestDispatcher rd = request.getRequestDispatcher("/stt/finalresult.jsp");
+			 RequestDispatcher rd = request.getRequestDispatcher("/stt/start.jsp");
              rd.include(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

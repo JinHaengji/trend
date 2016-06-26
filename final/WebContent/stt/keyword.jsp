@@ -20,16 +20,17 @@
 <%@page import="java.io.StringReader"%>
 <%@page import="org.apache.lucene.analysis.Token"%><HTML>
  <HEAD>
-  <TITLE>자바 한글형태소분석기 데모</TITLE>
+  <TITLE>Morpheme analysis</TITLE>
 	<STYLE type="text/css">
-	<!--
+
 	td {  font-size: 10pt}
 	select {  font-size: 10pt}
 	textarea {  font-size: 10pt}
 	.benhur1 {  font-size: 12pt}
-	a:visited {  text-decoration: none; color: #000000}
-	a:link {  text-decoration: none; color: #000000}
-	a:hover {  color: #000000; text-decoration: underline}
+	a {color: #EDA900}
+	a:visited {  text-decoration: none; color: #EDA900}
+	a:link {  text-decoration: none; color: #EDA900}
+	a:hover {  color: #E95D3C; text-decoration: underline }
 
 .outer {
 	color:#666666;
@@ -54,7 +55,31 @@
 	padding: 2px 0 2px 10px;
 	margin: 0 0 0 50px;
 }
-	-->
+	
+		.h1 {
+	 	stext-align: center;
+        font-family: 'Impact';
+        color: #E95D3C;
+	}
+	
+		.button-demo {
+		background: #E95D3C;
+    	color: #fff;
+    	font-family: Lucida Console;
+    	font-size: 13px;
+    	height: 30px;
+    	width: 80px;
+    	line-height: 20px;
+    	margin: 10px 10px;
+    	text-align: center;
+    	border: 0;
+    	transition: all 0.3s ease 0s;
+	}
+
+
+	.button-demo:hover {
+ 		 background: #EDA900
+	}
 	</STYLE>
  </HEAD>
 
@@ -71,9 +96,7 @@
   <table width="800" align="center">
   <tr>
   <td>
-		<div style="font-size:18pt;text-align:center">색인어 추출 데모</div>
-		<div style="font-size:10pt;text-align:center;color:blue">본 시스템은 색인어 추출 데모입니다</div>
-
+		<div style="font-size:18pt;text-align:center" class="h1">Extraction of entry</div>
   </td>
   </tr>
   <tr>
@@ -82,12 +105,12 @@
   <textarea name="input" rows="7" cols="100"></textarea>
   <div>
   <div style="text-align:right;margin-right:35px">
-  	<input type="submit" name="action" value="실행하기">
+  	<input type="submit" name="action" class="button-demo" value="실행하기">
   </div>
   </td>
   </tr>
   <tr>
-  <td style="background-color:#BBBBEF">
+  <td style="background-color:#FFCA6C">
   <div style="font-weight:bold;margin-top:20px;">입력 : </div>
   <div style="padding-left:40px;margin-top:5px"><%=question %></div>
   </td>

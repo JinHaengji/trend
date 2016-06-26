@@ -26,8 +26,7 @@
 <HTML>
  <HEAD>
   <TITLE>Morpheme analysis</TITLE>
-	<STYLE type="text/css">
-	
+	<STYLE type="text/css">	
 	td {  font-size: 10pt}
 	select {  font-size: 10pt}
 	textarea {  font-size: 10pt}
